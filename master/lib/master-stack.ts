@@ -28,13 +28,13 @@ export class MasterStack extends cdk.Stack {
         );
 
         masterSecurityGroup.addIngressRule(
-            ec2.Peer.ipv4('172.31.0.0/16'),
+            ec2.Peer.ipv4('10.13.0.0/16'),
             ec2.Port.allUdp(),
             'Allow all UDP inbound from within the subnet'
         );
 
         masterSecurityGroup.addIngressRule(
-            ec2.Peer.ipv4('172.31.0.0/16'),
+            ec2.Peer.ipv4('10.13.0.0/16'),
             ec2.Port.allTcp(),
             'Allow all TCP inbound from within the subnet'
         );
