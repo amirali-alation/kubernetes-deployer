@@ -4,7 +4,7 @@ import { SubnetType, InstanceType, InstanceClass, InstanceSize } from '@aws-cdk/
 import { Role, ServicePrincipal, ManagedPolicy, CfnInstanceProfile } from '@aws-cdk/aws-iam'
 import fs = require('fs');
 
-export class KubeStack extends cdk.Stack {
+export class MasterStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, targetVpcId: string, props?: cdk.StackProps) {
         super(scope, id, props);
         const vpc = ec2.Vpc.fromLookup(this, 'VPC', {
@@ -19,7 +19,7 @@ export class KubeStack extends cdk.Stack {
         })
 
         masterSecurityGroup.addIngressRule(
-            // Open to all temporary until we setup the gateway or bastion host and allow ssh only from
+            // Open to all temporary until we setup the bounndry and allow ssh only from
             // that instance using this example
             // ec2.Peer.ipv4('10.0.0.1/24'),
             ec2.Peer.anyIpv4(),
@@ -28,13 +28,13 @@ export class KubeStack extends cdk.Stack {
         );
 
         masterSecurityGroup.addIngressRule(
-            ec2.Peer.ipv4('10.13.0.0/16'),
+            ec2.Peer.ipv4('172.31.0.0/16'),
             ec2.Port.allUdp(),
             'Allow all UDP inbound from within the subnet'
         );
 
         masterSecurityGroup.addIngressRule(
-            ec2.Peer.ipv4('10.13.0.0/16'),
+            ec2.Peer.ipv4('172.31.0.0/16'),
             ec2.Port.allTcp(),
             'Allow all TCP inbound from within the subnet'
         );
@@ -73,7 +73,7 @@ export class KubeStack extends cdk.Stack {
             instanceName: "kube-master",
             instanceType: InstanceType.of(InstanceClass.T2, InstanceSize.MEDIUM),
             machineImage: ami,
-            keyName: 'gali_corp',
+            keyName: 'amirali.shahinpour',
             securityGroup: masterSecurityGroup,
             userData: masterUserData,
             blockDevices: diskConf,
@@ -82,3 +82,4 @@ export class KubeStack extends cdk.Stack {
 
     }
 }
+
