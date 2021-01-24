@@ -78,7 +78,7 @@ export class WorkerStack extends cdk.Stack {
                     instanceName: `kube-worker-${i}`,
                     instanceType: InstanceType.of(InstanceClass.T2, InstanceSize.MEDIUM),
                     machineImage: ami,
-                    keyName: 'gali_corp',
+                    keyName: 'amirali.shahinpour',
                     securityGroup: workerSecurityGroup,
                     userData: workerUserData,
                     blockDevices: diskConf,
