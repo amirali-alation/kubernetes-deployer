@@ -7,6 +7,7 @@ This deployment will use a given VPC, and will setup the subnet and security gro
 
 KURL.sh has been used to bootstrap the Kubernetes with the following spec:
 
+```yaml
 spec:
   kubernetes:
     version: 1.19.3
@@ -20,6 +21,8 @@ spec:
     version: 2.7.1
   ekco:
     version: 0.7.0
+ 
+```
 
 
 
