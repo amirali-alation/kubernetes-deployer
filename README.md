@@ -38,12 +38,14 @@ To learn more about CDK please look at
 
 There are two main modules, Master and Worker. Each module has its own Makefile. You can setup the master by running 
 ```bash
+cd master
 make deploy
 ```
 
 and After about 10 Minutes run the worker module using
 
 ```bash
+cd worker
 make deploy
 ```
 
