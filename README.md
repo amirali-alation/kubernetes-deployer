@@ -41,7 +41,7 @@ There are two main modules, Master and Worker. Each module has its own Makefile.
 make deploy
 ```
 
-and After about 10 Monites run the worker module using
+and After about 10 Minutes run the worker module using
 
 ```bash
 make deploy
